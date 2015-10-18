@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Marker
   layers:
   - Default
   - TransparentFX
@@ -46,7 +47,4 @@ TagManager:
     locked: 0
   - name: Fighting
     uniqueID: 2666515513
-    locked: 0
-  - name: New Layer
-    uniqueID: 4150735481
     locked: 0
