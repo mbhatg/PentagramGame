@@ -39,8 +39,11 @@ public class ZombieController : MonoBehaviour {
     }
 
     void receiveDamage(float damage) {
-        health -= damage;
-        hpbar.SendMessage("changeHealth", health / MAX_HEALTH);
+        if (damage > 0) {
+            health -= damage;
+            hpbar.SendMessage("changeHealth", health / MAX_HEALTH);
+        }
+        animator.SetTrigger("hurt");
     }
 
     void OnCollisionEnter2D(Collision2D collision) {

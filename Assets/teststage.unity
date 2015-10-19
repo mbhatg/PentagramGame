@@ -122,7 +122,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 457582, guid: cf3e843644edfea47bdbb3fca7575ae3, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 127554, guid: cf3e843644edfea47bdbb3fca7575ae3, type: 2}
       propertyPath: m_Name
@@ -132,14 +132,6 @@ Prefab:
       propertyPath: player
       value: 
       objectReference: {fileID: 769048369}
-    - target: {fileID: 5044276, guid: cf3e843644edfea47bdbb3fca7575ae3, type: 2}
-      propertyPath: m_CollisionDetection
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 127554, guid: cf3e843644edfea47bdbb3fca7575ae3, type: 2}
-      propertyPath: m_TagString
-      value: Enemy
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cf3e843644edfea47bdbb3fca7575ae3, type: 2}
   m_IsPrefabParent: 0
@@ -518,7 +510,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 457582, guid: cf3e843644edfea47bdbb3fca7575ae3, type: 2}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 127554, guid: cf3e843644edfea47bdbb3fca7575ae3, type: 2}
       propertyPath: m_Name

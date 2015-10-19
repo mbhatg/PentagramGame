@@ -12,6 +12,7 @@ GameObject:
   - 50: {fileID: 5044276}
   - 61: {fileID: 6184018}
   - 114: {fileID: 11497010}
+  - 95: {fileID: 9513014}
   m_Layer: 0
   m_Name: Zombie
   m_TagString: Enemy
@@ -45,7 +46,7 @@ Rigidbody2D:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!61 &6184018
 BoxCollider2D:
@@ -60,6 +61,23 @@ BoxCollider2D:
   m_Offset: {x: -.0170421302, y: -.176102132}
   serializedVersion: 2
   m_Size: {x: .238687575, y: .179627061}
+--- !u!95 &9513014
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 127554}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 130c2530ac82b0440a4cc1ce917bff0f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &11497010
 MonoBehaviour:
   m_ObjectHideFlags: 1
