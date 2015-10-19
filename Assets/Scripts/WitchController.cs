@@ -8,11 +8,18 @@ public class WitchController : MonoBehaviour {
     public Marker marker;
     public GameObject line;
     public GameObject circle;
+    public GameObject healthbar;
+    public GameObject healthbarBG;
+    public GameObject attackObj;
 
     float WALK_SPEED = 0.05f;
     Animator animator;
     int direction = 0;
     int speed = 0;
+
+    float MAX_HEALTH = 100f;
+    float health = 100f;
+    Healthbar hpbar;
 
     List<GameObject> collidingMarkers = new List<GameObject>();
     List<Marker> allMarkers = new List<Marker>();
@@ -21,6 +28,12 @@ public class WitchController : MonoBehaviour {
     // Use this for initialization
     void Start() {
         animator = GetComponent<Animator>();
+        //health bar stuff
+        GameObject hpbarBGObj = (GameObject)Instantiate(healthbarBG, transform.position, Quaternion.identity);
+        hpbarBGObj.GetComponent<HealthbarBG>().entity = this.gameObject;
+        GameObject hpbarObject = (GameObject)Instantiate(healthbar, transform.position, Quaternion.identity);
+        hpbar = hpbarObject.GetComponent<Healthbar>();
+        hpbar.entity = this.gameObject;
     }
     
     // Update is called once per frame
@@ -63,6 +76,11 @@ public class WitchController : MonoBehaviour {
         collidingMarkers.Remove(Other.gameObject);
     }
 
+    void receiveDamage(float damage) {
+        health -= damage;
+        hpbar.SendMessage("changeHealth", health / MAX_HEALTH);
+    }
+
     void updateAnimation() {
         animator.SetInteger("Direction", direction);
         animator.SetInteger("MoveSpeed", speed);
@@ -90,7 +108,7 @@ public class WitchController : MonoBehaviour {
         transform.Translate(spd_x, spd_y, 0);
     }
 
-    Vector3 getPos() {
+    public Vector3 getPos() {
         return new Vector3(transform.position.x, transform.position.y - 0.2f, transform.position.z);
     }
 
@@ -139,6 +157,14 @@ public class WitchController : MonoBehaviour {
         Destroy(toRemove);
     }
 
+    void removeAllMarkers() {
+        foreach (Marker m in allMarkers) {
+            Destroy(m.gameObject);
+        }
+        allMarkers.Clear();
+        allLines.Clear();
+    }
+
     public double ConvertToRadians(double angle) {
         return (System.Math.PI / 180) * angle;
     }
@@ -185,7 +211,7 @@ public class WitchController : MonoBehaviour {
             Debug.Log("Not enough markers on the field to activate!");
             return;
         }
-        drawLine(allMarkers[numMarkers - 1].getPos(), allMarkers[0].getPos());
+        allLines.Add(drawLine(allMarkers[numMarkers - 1].getPos(), allMarkers[0].getPos()));
 
         
         Vector3 center = new Vector3(0, 0, 0);
@@ -194,14 +220,34 @@ public class WitchController : MonoBehaviour {
         }
         center.Scale(new Vector3(1f / numMarkers, 1f / numMarkers, 1f / numMarkers));
 
+        float avgDist = 0;
+        float largestDist = 0;
         Vector2[] vertices = new Vector2[numMarkers];
         for (int i = 0; i < numMarkers; i++) {
             vertices[i] = allMarkers[i].getPos() - center;
+            if (vertices[i].magnitude > largestDist) {
+                largestDist = vertices[i].magnitude;
+            }
+            avgDist += vertices[i].magnitude;
+        }
+        avgDist = avgDist / numMarkers;
+        float stDev = 0;
+        for (int i = 0; i < numMarkers; i++) {
+            stDev += Mathf.Pow((vertices[i].magnitude - avgDist) * 10f, 2f);
         }
 
-        GameObject attack = (GameObject)Instantiate(circle, center, Quaternion.identity);
+        GameObject attackCircle = (GameObject)Instantiate(circle, center, Quaternion.identity);
         //fix attackcircle's scale by largest dist from center
+        attackCircle.transform.localScale = new Vector3(0.21f * largestDist, 0.21f * largestDist, 1f);
 
+        float power = 3f * numMarkers + Mathf.Max(0, 15f * numMarkers - stDev * 10f);
+        Debug.Log(stDev);
+        GameObject attack = (GameObject)Instantiate(attackObj, center, Quaternion.identity);
+        Attack attackScript = attack.GetComponent<Attack>();
+        attackScript.enemyTag = "Enemy";
+        attackScript.power = Mathf.Max(0, power);
+        attackScript.lines = new List<GameObject>(allLines);
+        attackScript.lines.Add(attackCircle);
         attack.AddComponent<PolygonCollider2D>();
         PolygonCollider2D collider = attack.GetComponent<PolygonCollider2D>();
         collider.pathCount = numMarkers;
@@ -223,16 +269,21 @@ public class WitchController : MonoBehaviour {
                 }
             }
         }
+
         if (innerVerts.Count > 2) {
-            GameObject innerAttack = (GameObject)Instantiate(circle, center, Quaternion.identity);
-            //fix attackcircle's scale by largest dist from center
-            
+            GameObject innerAttack = (GameObject)Instantiate(attackObj, center, Quaternion.identity);
+            Attack innerAttackScript = innerAttack.GetComponent<Attack>();
+            innerAttackScript.enemyTag = "Enemy";
+            innerAttackScript.power = Mathf.Max(0, power) * 1.5f;
             innerAttack.AddComponent<PolygonCollider2D>();
             PolygonCollider2D innerCollider = innerAttack.GetComponent<PolygonCollider2D>();
             innerCollider.pathCount = numMarkers;
             innerCollider.points = innerVerts.ToArray();
             innerCollider.isTrigger = true;
         }
+
+        removeAllMarkers();
+
     }
 
 }
