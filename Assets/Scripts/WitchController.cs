@@ -40,18 +40,33 @@ public class WitchController : MonoBehaviour {
     void Update() {
         GetComponent<SpriteRenderer>().sortingOrder = Mathf.RoundToInt(getPos().y * 100f) * -1;
         if (Input.GetKey(KeyCode.UpArrow)) {
+            if (speed != 1 || direction != 3) {
+                animator.SetTrigger("ChangeAnimation");
+            }
             direction = 3;
             speed = 1;
         } else if (Input.GetKey(KeyCode.DownArrow)) {
+            if (speed != 1 || direction != 1) {
+                animator.SetTrigger("ChangeAnimation");
+            }
             direction = 1;
             speed = 1;
         } else if (Input.GetKey(KeyCode.LeftArrow)) {
+            if (speed != 1 || direction != 2) {
+                animator.SetTrigger("ChangeAnimation");
+            }
             direction = 2;
             speed = 1;
         } else if (Input.GetKey(KeyCode.RightArrow)) {
+            if (speed != 1 || direction != 4) {
+                animator.SetTrigger("ChangeAnimation");
+            }
             direction = 4;
             speed = 1;
         } else {
+            if (speed != 0) {
+                animator.SetTrigger("ChangeAnimation");
+            }
             speed = 0;
         }
 
@@ -163,6 +178,7 @@ public class WitchController : MonoBehaviour {
         }
         allMarkers.Clear();
         allLines.Clear();
+        collidingMarkers.Clear();
     }
 
     public double ConvertToRadians(double angle) {
