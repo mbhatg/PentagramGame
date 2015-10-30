@@ -12,7 +12,7 @@ GameObject:
   - 114: {fileID: 11482672}
   - 61: {fileID: 6184462}
   m_Layer: 0
-  m_Name: BasicMarker
+  m_Name: Rune
   m_TagString: Marker
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

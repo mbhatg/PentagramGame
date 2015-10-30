@@ -4,8 +4,8 @@ using System.Collections;
 public class ZombieController : MonoBehaviour {
    
     public WitchController player;
-    public GameObject healthbar;
-    public GameObject healthbarBG;
+    Object healthbar;
+    Object healthbarBG;
 
     Animator animator;
 
@@ -17,6 +17,8 @@ public class ZombieController : MonoBehaviour {
     void Start() {
         animator = GetComponent<Animator>();
         //health bar stuff
+        healthbar = Resources.Load("healthbar");
+        healthbarBG = Resources.Load("HealthbarBG");
         GameObject hpbarBGObj = (GameObject)Instantiate(healthbarBG, transform.position, Quaternion.identity);
         hpbarBGObj.GetComponent<HealthbarBG>().entity = this.gameObject;
         GameObject hpbarObject = (GameObject)Instantiate(healthbar, transform.position, Quaternion.identity);

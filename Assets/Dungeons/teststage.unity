@@ -135,6 +135,48 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cf3e843644edfea47bdbb3fca7575ae3, type: 2}
   m_IsPrefabParent: 0
+--- !u!1001 &492995015
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 491204, guid: 2d280a3d4d951c94981aabb9d5c9dfad, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -.576952517
+      objectReference: {fileID: 0}
+    - target: {fileID: 491204, guid: 2d280a3d4d951c94981aabb9d5c9dfad, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -.0918762311
+      objectReference: {fileID: 0}
+    - target: {fileID: 491204, guid: 2d280a3d4d951c94981aabb9d5c9dfad, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -.760253906
+      objectReference: {fileID: 0}
+    - target: {fileID: 491204, guid: 2d280a3d4d951c94981aabb9d5c9dfad, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 491204, guid: 2d280a3d4d951c94981aabb9d5c9dfad, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 491204, guid: 2d280a3d4d951c94981aabb9d5c9dfad, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 491204, guid: 2d280a3d4d951c94981aabb9d5c9dfad, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 491204, guid: 2d280a3d4d951c94981aabb9d5c9dfad, type: 2}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 2d280a3d4d951c94981aabb9d5c9dfad, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1001 &513317389
 Prefab:
   m_ObjectHideFlags: 0
@@ -272,7 +314,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 757511687
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 19608860eb2fd0243877596d1a5d2d8c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ae222e51ba7911b41b0a41580a87950f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!4 &624389615
 Transform:

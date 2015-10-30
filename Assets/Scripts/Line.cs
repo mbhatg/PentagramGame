@@ -16,7 +16,9 @@ public class Line : MonoBehaviour {
 
     void activate() {
         //play animation then destroy self
+        if (animator != null) {
+            animator.SetTrigger("glow");
+        }
         Destroy(gameObject, 1f);
-        animator.SetTrigger("glow");
     }
 }

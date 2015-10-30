@@ -4,13 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 
 public class WitchController : MonoBehaviour {
-    
-    public Marker marker;
-    public GameObject line;
-    public GameObject circle;
-    public GameObject healthbar;
-    public GameObject healthbarBG;
-    public GameObject attackObj;
+
+    Object healthbar;
+    Object healthbarBG;
 
     float WALK_SPEED = 0.05f;
     Animator animator;
@@ -28,12 +24,14 @@ public class WitchController : MonoBehaviour {
     void Start() {
         animator = GetComponent<Animator>();
         //health bar stuff
+        healthbar = Resources.Load("healthbar");
+        healthbarBG = Resources.Load("HealthbarBG");
         GameObject hpbarBGObj = (GameObject)Instantiate(healthbarBG, transform.position, Quaternion.identity);
         hpbarBGObj.GetComponent<HealthbarBG>().entity = this.gameObject;
         GameObject hpbarObject = (GameObject)Instantiate(healthbar, transform.position, Quaternion.identity);
         hpbar = hpbarObject.GetComponent<Healthbar>();
         hpbar.entity = this.gameObject;
-
+        
         Object pentagram = Resources.Load("Pentagram");
         GameObject newPentagram = (GameObject)Instantiate(pentagram, transform.position, Quaternion.identity);
         pentagrams.Add(newPentagram.GetComponent<Pentagram>());
@@ -43,8 +41,7 @@ public class WitchController : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         GetComponent<SpriteRenderer>().sortingOrder = Mathf.RoundToInt(getPos().y * 100f) * -1;
-        if (health <= 0f)
-        {
+        if (health <= 0f) {
             die();
         }
         if (Input.GetKey(KeyCode.UpArrow)) {
@@ -99,8 +96,7 @@ public class WitchController : MonoBehaviour {
         animator.SetInteger("MoveSpeed", speed);
     }
 
-    void die()
-    {
+    void die() {
         //TODO: make dying animation
         Destroy(gameObject, 0.1f);
     }
